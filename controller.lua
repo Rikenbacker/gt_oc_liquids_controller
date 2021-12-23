@@ -5,8 +5,8 @@ local mode = 0
 -- 1 - Раздача товара
 -- 2 - Забор схемы
 
-setBundledOutput(2, 14, 0)
-setBundledOutput(2, 15, 0)
+rs.setBundledOutput(2, 14, 0)
+rs.setBundledOutput(2, 15, 0)
 
 while true do
   if mode == 0 then
