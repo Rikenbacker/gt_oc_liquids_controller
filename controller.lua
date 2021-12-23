@@ -8,6 +8,15 @@ local mode = 0
 rs.setBundledOutput(2, 14, 0)
 rs.setBundledOutput(2, 15, 0)
 
+function waitForWork()
+  local chestInv = trs.getAllStacks(1)
+  if chestInv.count() > 0 then
+    return 1
+  end
+  
+  return 0
+end
+
 while true do
   if mode == 0 then
     mode = waitForWork()
@@ -16,20 +25,6 @@ while true do
   end
   if mode == 2 then
   end
-  if rs.getInput(3) > 0 then
-    computer.beep()
-  end
-  rs.setOutput(2, 15)
-  computer.pullSignal(1)
-  rs.setOutput(2, 0)
-  computer.pullSignal(1)
-end
 
-function waitForWork()
-  local chestInv = trs.getAllStacks(1)
-  if chestInv.count() > 0 then
-    return 1
-  end
-  
-  return 0
+  computer.pullSignal(1)
 end
