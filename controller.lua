@@ -4,6 +4,7 @@ while true do
     computer.beep()
   end
   rs.setOutput(2, 15)
-  computer.pullSignal()
+  computer.pullSignal(1)
   rs.setOutput(2, 0)
+  computer.pullSignal(1)
 end
