@@ -8,7 +8,7 @@ local mode = 0
 rs.setBundledOutput(2, 14, 0)
 rs.setBundledOutput(2, 15, 0)
 
-function waitForWork()
+local function waitForWork(args)
   local chestInv = trs.getAllStacks(1)
   if chestInv.count() > 0 then
     return 1
