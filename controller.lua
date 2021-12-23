@@ -1,18 +1,22 @@
 local rs = component.proxy(component.list("redstone")())
 local trs = component.proxy(component.list("transposer")())
 
-local sides = require("sides")
-
 local mode = 0
 -- 0 - Ожидание работы
 -- 1 - Раздача товара
 -- 2 - Забор схемы
 
-rs.setBundledOutput(sides.back, 14, 0)
-rs.setBundledOutput(sides.back, 15, 0)
+local sideBTop = 1
+local sideBack = 2
+
+local colorRed = 14
+local colorBlack = 14
+
+rs.setBundledOutput(sideBack, colorRed, 0)
+rs.setBundledOutput(sideBack, colorBlack, 0)
 
 local function waitForWork(args)
-  local chestInv = trs.getAllStacks(1)
+  local chestInv = trs.getAllStacks(sideBTop)
   if chestInv.count() > 0 then
     return 1
   end
@@ -21,9 +25,9 @@ local function waitForWork(args)
 end
 
 local function sendIngridients(args)
-  rs.setBundledOutput(2, 14, 15)
+  rs.setBundledOutput(sideBack, colorRed, 15)
   
-  local chestInv = trs.getAllStacks(1)
+  local chestInv = trs.getAllStacks(sideBTop)
 
   
   return 1
