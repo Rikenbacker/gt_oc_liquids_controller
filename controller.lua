@@ -1,12 +1,15 @@
 local rs = component.proxy(component.list("redstone")())
 local trs = component.proxy(component.list("transposer")())
+
+local sides = require("sides")
+
 local mode = 0
 -- 0 - Ожидание работы
 -- 1 - Раздача товара
 -- 2 - Забор схемы
 
-rs.setBundledOutput(2, 14, 0)
-rs.setBundledOutput(2, 15, 0)
+rs.setBundledOutput(sides.back, 14, 0)
+rs.setBundledOutput(sides.back, 15, 0)
 
 local function waitForWork(args)
   local chestInv = trs.getAllStacks(1)
