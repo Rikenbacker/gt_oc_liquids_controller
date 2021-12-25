@@ -89,7 +89,7 @@ local function sendIngridients(args)
   end  
   
   curentItemPosition = positionStartNonTanks
-  for i, item in chestInv do
+  for i, item in pairs(chestInv) do
     local pos = calcPositionToMove(item)
     if pos ~= nil then
       trs.transferItem(sideTop, sideRignt, item.size, i, pos)
