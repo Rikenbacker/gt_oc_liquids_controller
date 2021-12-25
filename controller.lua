@@ -13,7 +13,7 @@ local curentItemPosition = 0
 
 local tanks = {"gregtech:gt.Volumetric_Flask"}
 
-local sideBTop = 1
+local sideTop = 1
 local sideBack = 2
 local sideRight = 4
 
@@ -72,7 +72,7 @@ end
 
 local function waitForWork(args)
   print("waitForWork")
-  local chestInv = trs.getAllStacks(sideBTop).getAll()
+  local chestInv = trs.getAllStacks(sideTop).getAll()
   if isEmpty(chestInv) == false then
     sortTanksTable = {}
     return 1
@@ -83,7 +83,7 @@ end
 
 local function sendIngridients(args)
   print("sendIngridients")
-  local chestInv = trs.getAllStacks(sideBTop).getAll()
+  local chestInv = trs.getAllStacks(sideTop).getAll()
   if isEmpty(chestInv) == true then
     return 2
   end  
