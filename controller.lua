@@ -43,15 +43,16 @@ local function isTank(item)
 end
 
 local function getTankSlot(item)
+  print(getTankSlot)
+  print(#sortTanksTable)
   for i, v in #sortTanksTable do
     if v.name == item.name and v.tag == name.tag then
       return i
     end
   end
   
-  local pos = #sortTanksTable
   tankItem = {name = item.name, tag = item.tag}
-  sortTanksTable[#sortTanksTable] = tankItem
+  table.insert(sortTanksTable, tankItem)
   
   return pos
 end
