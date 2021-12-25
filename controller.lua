@@ -69,6 +69,7 @@ local function calcPositionToMove(item)
 end
 
 local function waitForWork(args)
+  print("waitForWork")
   local chestInv = trs.getAllStacks(sideBTop).getAll()
   if isEmpty(chestInv) == false then
     sortTanksTable = {}
@@ -97,6 +98,7 @@ local function sendIngridients(args)
 end
 
 while true do
+  print("main loop")
   if mode == 0 then
     mode = waitForWork()
   end  
