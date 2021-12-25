@@ -89,11 +89,13 @@ local function sendIngridients(args)
   
   curentItemPosition = positionStartNonTanks
   for i, item in pairs(chestInv) do
-    print(item.name, item.tag)
-    local pos = calcPositionToMove(item)
-    if pos ~= nil then
-      print(sideTop, sideRight, item.size, i + 1, pos)
-      trs.transferItem(sideTop, sideRight, item.size, i + 1, pos)
+    if (item.name ~= nil) then
+      print(i, item.name, item.tag)
+      local pos = calcPositionToMove(item)
+      if pos ~= nil then
+        print(sideTop, sideRight, item.size, i + 1, pos)
+        trs.transferItem(sideTop, sideRight, item.size, i + 1, pos)
+      end
     end
   end
 
