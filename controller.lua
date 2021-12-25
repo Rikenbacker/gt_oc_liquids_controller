@@ -62,11 +62,10 @@ local function calcPositionToMove(item)
   end
   
   if isTank(item) == true then
-    return getTankSlot(item)
+    return getTankSlot(item) + 1
   else
-    local tmp = curentItemPosition
     curentItemPosition = curentItemPosition + 1
-    return tmp
+    return curentItemPosition
   end
 end
 
