@@ -27,7 +27,7 @@ end
 
 local function waitForWork(args)
   local chestInv = trs.getAllStacks(sideBTop).getAll()
-  if ~isEmpty(chestInv) then
+  if isEmpty(chestInv) == false then
     return 1
   end
   
