@@ -46,6 +46,7 @@ local function getTankSlot(item)
   print("getTankSlot #sortTanksTable=", #sortTanksTable)
   for i, v in pairs(sortTanksTable) do
     if v.name == item.name and v.tag == item.tag then
+      print("found:", i)
       return i
     end
   end
@@ -53,7 +54,7 @@ local function getTankSlot(item)
   tankItem = {name = item.name, tag = item.tag}
   table.insert(sortTanksTable, tankItem)
   
-  return #sortTanksTable - 1
+  return #sortTanksTable
 end
 
 local function calcPositionToMove(item)
@@ -62,7 +63,7 @@ local function calcPositionToMove(item)
   end
   
   if isTank(item) == true then
-    return getTankSlot(item) + 1
+    return getTankSlot(item)
   else
     curentItemPosition = curentItemPosition + 1
     return curentItemPosition
