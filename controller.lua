@@ -15,7 +15,7 @@ local tanks = {"gregtech:gt.Volumetric_Flask"}
 
 local sideTop = 1
 local sideBack = 2
-local sideRight = 4
+local sideRight = 2
 
 local colorRed = 14
 local colorBlack = 14
