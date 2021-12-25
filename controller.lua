@@ -45,7 +45,7 @@ end
 local function getTankSlot(item)
   print("getTankSlot #sortTanksTable=", #sortTanksTable)
   for i, v in pairs(sortTanksTable) do
-    if v.name == item.name and v.tag == name.tag then
+    if v.name == item.name and v.tag == item.tag then
       return i
     end
   end
