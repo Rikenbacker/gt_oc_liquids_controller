@@ -15,7 +15,7 @@ local tanks = {"gregtech:gt.Volumetric_Flask"}
 
 local sideBTop = 1
 local sideBack = 2
-local sideRignt = 4
+local sideRight = 4
 
 local colorRed = 14
 local colorBlack = 14
@@ -90,9 +90,11 @@ local function sendIngridients(args)
   
   curentItemPosition = positionStartNonTanks
   for i, item in pairs(chestInv) do
+    print(item.name, item.tag)
     local pos = calcPositionToMove(item)
     if pos ~= nil then
-      trs.transferItem(sideTop, sideRignt, item.size, i, pos)
+      print(sideTop, sideRight, item.size, i, pos)
+      trs.transferItem(sideTop, sideRight, item.size, i, pos)
     end
   end
 
