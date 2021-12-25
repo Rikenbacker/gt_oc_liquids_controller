@@ -63,12 +63,12 @@ local function calcPositionToMove(item)
   end
   
   if isTank(item) == true then
-    return 0
+    return getTankSlot(item)
   else
-    return 1
+    local tmp = curentItemPosition
+    curentItemPosition = curentItemPosition + 1
+    return tmp
   end
-  
-  return nil
 end
 
 local function waitForWork(args)
