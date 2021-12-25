@@ -92,8 +92,8 @@ local function sendIngridients(args)
     print(item.name, item.tag)
     local pos = calcPositionToMove(item)
     if pos ~= nil then
-      print(sideTop, sideRight, item.size, i, pos)
-      trs.transferItem(sideTop, sideRight, item.size, i, pos)
+      print(sideTop, sideRight, item.size, i + 1, pos)
+      trs.transferItem(sideTop, sideRight, item.size, i + 1, pos)
     end
   end
 
