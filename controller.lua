@@ -1,4 +1,6 @@
-local trs = component.proxy(component.list("transposer")())
+local cmp = require("component")
+local trs = cmp.transposer
+event = require("event")
 
 -- 0 - Ожидание работы
 -- 1 - Раздача товара
@@ -82,7 +84,7 @@ end
 local function sendIngridients(args)
   print("sendIngridients")
   local chestInv = trs.getAllStacks(sideBTop).getAll()
-  if isEmpty(chestInv) == false then
+  if isEmpty(chestInv) == true then
     return 2
   end  
   
@@ -108,5 +110,8 @@ while true do
   if mode == 2 then
   end
 
-  computer.pullSignal(1)
+  os.sleep(0.1)
+  if event.pull(.5, "interrupted") then
+      break
+  end
 end
