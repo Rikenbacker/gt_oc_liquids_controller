@@ -25,7 +25,7 @@ local function waitForWork(args)
 end
 
 local function sendIngridients(args)
-  rs.setBundledOutput(sideBack, colorRed, 15)
+  rs.setBundledOutput(sideBack, colorRed, 255)
   
   local chestInv = trs.getAllStacks(sideBTop)
 
