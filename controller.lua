@@ -53,7 +53,7 @@ local function getTankSlot(item)
   tankItem = {name = item.name, tag = item.tag}
   table.insert(sortTanksTable, tankItem)
   
-  return pos
+  return #sortTanksTable - 1
 end
 
 local function calcPositionToMove(item)
