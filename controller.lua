@@ -14,7 +14,7 @@ local tanks = {"gregtech:gt.Volumetric_Flask"}
 
 local sideTop = 1
 local sideBack = 2
-local sideRight = 4
+local sideRight = 2
 
 local colorRed = 14
 local colorBlack = 14
@@ -45,17 +45,16 @@ local function isTank(item)
 end
 
 local function getTankSlot(item)
-  for i, v in #sortTanksTable do
-    if v.name == item.name and v.tag == name.tag then
+  for i, v in pairs(sortTanksTable) do
+    if v.name == item.name and v.tag == item.tag then
       return i
     end
   end
   
-  local pos = #sortTanksTable
   tankItem = {name = item.name, tag = item.tag}
-  sortTanksTable[#sortTanksTable] = tankItem
+  table.insert(sortTanksTable, tankItem)
   
-  return pos
+  return #sortTanksTable
 end
 
 local function calcPositionToMove(item)
@@ -64,7 +63,7 @@ local function calcPositionToMove(item)
   end
   
   if isTank(item) == true then
-    return getTankSlot(item) + 1
+    return getTankSlot(item) 
   else
     curentItemPosition = curentItemPosition + 1
     return curentItemPosition
@@ -91,9 +90,11 @@ local function sendIngridients(args)
   
   curentItemPosition = positionStartNonTanks
   for i, item in pairs(chestInv) do
-    local pos = calcPositionToMove(item)
-    if pos ~= nil then
-      trs.transferItem(sideTop, sideRight, item.size, i + 1, pos)
+    if (item.name ~= nil) then
+      local pos = calcPositionToMove(item)
+      if pos ~= nil then
+        trs.transferItem(sideTop, sideRight, item.size, i + 1, pos)
+      end
     end
   end
 
