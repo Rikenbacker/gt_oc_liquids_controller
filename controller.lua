@@ -7,7 +7,7 @@ local trs = component.proxy(component.list("transposer")())
 -- 3 - Забор схемы
 local mode = 0
 
-local sortTable = {}
+local sortTanksTable = {}
 local curentItemPosition = 0
 
 local tanks = {"gregtech:gt.Volumetric_Flask"}
@@ -43,6 +43,20 @@ local function isTank(item)
   return false
 end
 
+local function getTankSlot(item)
+  for i, v in #sortTanksTable do
+    if v.name == item.name and v.tag == name.tag then
+      return i
+    end
+  end
+  
+  local pos = #sortTanksTable
+  tankItem = {name = item.name, tag = item.tag}
+  sortTanksTable[#sortTanksTable] = tankItem
+  
+  return pos
+end
+
 local function calcPositionToMove(item)
   if item.name == nil then
     return nil
@@ -60,6 +74,7 @@ end
 local function waitForWork(args)
   local chestInv = trs.getAllStacks(sideBTop).getAll()
   if isEmpty(chestInv) == false then
+    sortTanksTable = {}
     return 1
   end
   
