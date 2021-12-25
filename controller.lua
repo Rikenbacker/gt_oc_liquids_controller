@@ -1,4 +1,3 @@
-local rs = component.proxy(component.list("redstone")())
 local trs = component.proxy(component.list("transposer")())
 
 -- 0 - Ожидание работы
@@ -21,9 +20,6 @@ local colorBlack = 14
 
 -- Стартовая Позиция в сундуке откуда начинают забираться обычные предметы
 local positionStartNonTanks = 16
-
-rs.setBundledOutput(sideBack, colorRed, 0)
-rs.setBundledOutput(sideBack, colorBlack, 0)
 
 local function isEmpty(table)
   for i = 0, #table do
@@ -83,8 +79,7 @@ local function waitForWork(args)
 end
 
 local function sendIngridients(args)
-  rs.setBundledOutput(sideBack, colorRed, 255)
-  
+  print("sendIngridients")
   local chestInv = trs.getAllStacks(sideBTop).getAll()
   if isEmpty(chestInv) == false then
     return 2
