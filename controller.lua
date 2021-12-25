@@ -22,7 +22,7 @@ local function isEmpty(table)
     end
   end
   
-  return empty
+  return true
 end
 
 local function waitForWork(args)
