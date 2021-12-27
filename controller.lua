@@ -25,6 +25,8 @@ local sideTop = 1
 
 local colorRed = 14
 local colorBlack = 15
+local colorWhite = 0
+local colorBlue = 11
 
 -- Положение мусорки сундуке (не будет класться в шину, а сразу в выход)
 local positionTrash = 16
@@ -96,6 +98,11 @@ local function calcPositionToMove(item)
 end
 
 local function waitForWork(args)
+  rs.setBundledOutput(sideBack, colorRed, 0)
+  rs.setBundledOutput(sideBack, colorBlack, 0)
+  sortTanksTable = {}
+  isCircuitPlanted = false
+
   local chestInv = trs.getAllStacks(sideNorth).getAll()
   if isEmpty(chestInv) == false then
     sortTanksTable = {}
@@ -134,7 +141,8 @@ end
 
 local function waitWhileWorking(args)
   local chestInv = trs.getAllStacks(sideSouth).getAll()
-  if isEmpty(chestInv) == true then
+  local signal = rs.getBundledInput(sideBack, colorWhite)
+  if isEmpty(chestInv) == true and signal == 0 then
 	return 3
   end  
   
@@ -144,6 +152,11 @@ end
 local function finishing(args)
   rs.setBundledOutput(sideBack, colorRed, 0)
   rs.setBundledOutput(sideBack, colorBlack, 255)
+  
+  local signal = rs.getBundledInput(sideBack, colorBlue)
+  if and signal == 0 then
+	return 0
+  end  
   
   return 3
 end
