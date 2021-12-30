@@ -40,8 +40,10 @@ rs.setBundledOutput(sideBack, colorBlack, 0)
 
 local function isEmpty(table)
   for i = 0, #table do
-    if table[i].label ~= nil then
-      return false
+    if table[i] ~= nill then		
+      if table[i].label ~= nil then
+        return false
+      end
     end
   end
   
