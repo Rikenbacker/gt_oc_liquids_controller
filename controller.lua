@@ -13,6 +13,8 @@ local sortTanksTable = {}
 local curentItemPosition = 0
 -- Флаг обозначающий то что микросхема уже положена в контроллера
 local isCircuitPlanted = false
+-- Состояние входного сундука
+local inputChest = {}
 
 
 local tanks = {"gregtech:gt.Volumetric_Flask"}
@@ -102,10 +104,10 @@ local function waitForWork(args)
   rs.setBundledOutput(sideBack, colorBlack, 0)
   sortTanksTable = {}
   isCircuitPlanted = false
+  inputChest = {}
 
-  local chestInv = trs.getAllStacks(sideNorth).getAll()
-  if isEmpty(chestInv) == false then
-    sortTanksTable = {}
+  inputChest = trs.getAllStacks(sideNorth).getAll()
+  if isEmpty(inputChest) == false then
     return 1
   end
   
@@ -114,26 +116,24 @@ end
 
 local function sendIngridients(args)
   rs.setBundledOutput(sideBack, colorRed, 255)
-  
-  local chestInv = trs.getAllStacks(sideNorth).getAll()
-  if isEmpty(chestInv) == true then
-	return 2
-  end  
-  
+    
   curentItemPosition = positionStartNonTanks
-  for i, item in pairs(chestInv) do
+  for i, item in pairs(inputChest) do
     if (item.name ~= nil) then
       local pos = calcPositionToMove(item)
       if pos ~= nil then
-        trs.transferItem(sideNorth, sideSouth, item.size, i + 1, pos)
+        local transfer = trs.transferItem(sideNorth, sideSouth, item.size, i + 1, pos)
+	if (item.size - transfer) == 0 then
+          inputChest[i] = nil
+        else
+          inputChest[i].size = item.size - transfer 
+        end
       end
     end
   end
 
-  -- После проброски вещей снова проверяю сундук, чтобы не было лага между тиками, когда интефейс накидает новых вещей
-  local chestInv = trs.getAllStacks(sideNorth).getAll()
-  if isEmpty(chestInv) == true then
-	return 2
+  if isEmpty(inputChest) == true then
+    return 2
   end  
   
   return 1
@@ -143,7 +143,7 @@ local function waitWhileWorking(args)
   local chestInv = trs.getAllStacks(sideSouth).getAll()
   local signal = rs.getBundledInput(sideBack, colorWhite)
   if isEmpty(chestInv) == true and signal == 0 then
-	return 3
+    return 3
   end  
   
   return 2
