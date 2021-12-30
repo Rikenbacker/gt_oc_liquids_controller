@@ -157,7 +157,8 @@ local function finishing(args)
   
   local signal = rs.getBundledInput(sideBack, colorBlue)
   if signal == 0 then
-	return 0
+    rs.setBundledOutput(sideBack, colorBlack, 0)
+    return 0
   end  
   
   return 3
