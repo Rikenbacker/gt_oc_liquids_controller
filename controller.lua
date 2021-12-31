@@ -183,13 +183,17 @@ end
 while true do
   if mode == 0 then
     mode = waitForWork()
-  elseif mode == 1 then
+  end
+  if mode == 1 then
     mode = sendIngridients()
-  elseif mode == 2 then
+  end
+  if mode == 2 then
     mode = waitFillTank()
-  elseif mode == 3 then
+  end
+  if mode == 3 then
     mode = waitWhileWorking()
-  elseif mode == 4 then
+  end
+  if mode == 4 then
     mode = finishing()
   end  
 
