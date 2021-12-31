@@ -140,8 +140,6 @@ local function sendIngridients(args)
   end
 
   if isEmpty(inputChest) == true then
-    -- Жду ещё секунду, иначе этот кусок говна не успевает распихать и получается что всё переключается на забор предметов из шины
-    computer.pullSignal(1)
     return 2
   end  
   
