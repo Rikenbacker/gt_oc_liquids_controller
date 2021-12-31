@@ -135,6 +135,8 @@ local function sendIngridients(args)
   end
 
   if isEmpty(inputChest) == true then
+    // Жду ещё секунду, иначе этот кусок говна не успевает распихать и получается что всё переключается на забор предметов из шины
+    computer.pullSignal(1)
     return 2
   end  
   
@@ -170,9 +172,9 @@ while true do
   elseif mode == 1 then
     mode = sendIngridients()
   elseif mode == 2 then
-	mode = waitWhileWorking()
+    mode = waitWhileWorking()
   elseif mode == 3 then
-	mode = finishing()
+    mode = finishing()
   end  
 
   computer.pullSignal(1)
