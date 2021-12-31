@@ -167,14 +167,11 @@ end
 while true do
   if mode == 0 then
     mode = waitForWork()
-  end  
-  if mode == 1 then
+  elseif mode == 1 then
     mode = sendIngridients()
-  end
-  if mode == 2 then
+  elseif mode == 2 then
 	mode = waitWhileWorking()
-  end
-  if mode == 3 then
+  elseif mode == 3 then
 	mode = finishing()
   end  
 
