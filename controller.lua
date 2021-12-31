@@ -1,3 +1,5 @@
+-- КОД НЕ ВЛЕЗЕТ В КОНТРОЛЛЕР. ВОСПОЛЬЗУЙСЯ УМЕНЬШИТЕЛЕМ!!! https://goonlinetools.com/lua-minifier/
+
 local rs = component.proxy(component.list("redstone")())
 local trs = component.proxy(component.list("transposer")())
 
