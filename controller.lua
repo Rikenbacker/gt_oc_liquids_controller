@@ -3,8 +3,9 @@ local trs = component.proxy(component.list("transposer")())
 
 -- 0 - Ожидание работы (Пока во входном сундуке не появится что-либо)
 -- 1 - Раздача товара (пока не опустеет входной сундук)
--- 2 - Ожидание завершения (пока не опустеет выходной сундук и пока не погаснет белый сигнал)
--- 3 - Забор схемы (пока не погаснет синий сигнал)
+-- 2 - Ожидание заполненности зотя-бы одного танка (появление белого сигнала)
+-- 3 - Запуск работы (выдача зелёного сигнала) и ожидания выключения белого сигнала
+-- 4 - Забор схемы (пока не погаснет синий сигнал)
 local mode = 0
 
 -- Сортировка танков по слотам
@@ -29,6 +30,7 @@ local colorRed = 14
 local colorBlack = 15
 local colorWhite = 0
 local colorBlue = 11
+local colorGreen = 13
 
 -- Положение мусорки сундуке (не будет класться в шину, а сразу в выход)
 local positionTrash = 16
@@ -37,6 +39,7 @@ local positionStartNonTanks = 17
 
 rs.setBundledOutput(sideBack, colorRed, 0)
 rs.setBundledOutput(sideBack, colorBlack, 0)
+rs.setBundledOutput(sideBack, colorGreen, 0)
 
 local function isEmpty(table)
   for i = 0, #table do
@@ -104,6 +107,8 @@ end
 local function waitForWork(args)
   rs.setBundledOutput(sideBack, colorRed, 0)
   rs.setBundledOutput(sideBack, colorBlack, 0)
+  rs.setBundledOutput(sideBack, colorGreen, 0)
+
   sortTanksTable = {}
   isCircuitPlanted = false
   inputChest = {}
@@ -143,27 +148,38 @@ local function sendIngridients(args)
   return 1
 end
 
-local function waitWhileWorking(args)
-  local chestInv = trs.getAllStacks(sideSouth).getAll()
+local function waitFillTank(args)
   local signal = rs.getBundledInput(sideBack, colorWhite)
-  if isEmpty(chestInv) == true and signal == 0 then
+  if signal > 1 then
     return 3
   end  
   
   return 2
 end
 
+local function waitWhileWorking(args)
+  rs.setBundledOutput(sideBack, colorGreen, 255)
+  local chestInv = trs.getAllStacks(sideSouth).getAll()
+  local signal = rs.getBundledInput(sideBack, colorWhite)
+  if isEmpty(chestInv) == true and signal == 0 then
+    return 4
+  end  
+  
+  return 3
+end
+
 local function finishing(args)
   rs.setBundledOutput(sideBack, colorRed, 0)
   rs.setBundledOutput(sideBack, colorBlack, 255)
-  
+  rs.setBundledOutput(sideBack, colorGreen, 0)
+
   local signal = rs.getBundledInput(sideBack, colorBlue)
   if signal == 0 then
     rs.setBundledOutput(sideBack, colorBlack, 0)
     return 0
   end  
   
-  return 3
+  return 4
 end
 
 while true do
@@ -172,8 +188,10 @@ while true do
   elseif mode == 1 then
     mode = sendIngridients()
   elseif mode == 2 then
-    mode = waitWhileWorking()
+    mode = waitFillTank()
   elseif mode == 3 then
+    mode = waitWhileWorking()
+  elseif mode == 4 then
     mode = finishing()
   end  
 
