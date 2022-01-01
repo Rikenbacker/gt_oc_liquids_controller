@@ -46,7 +46,7 @@ local function isOnlyCircuit(table)
   for i = 0, #table do
     if table[i] ~= nill then		
       if table[i].label ~= nil then
-        if isItemCircuit(item) == true then
+        if isItemCircuit(table[i]) == true then
           if findedCircuit == false then
             findedCircuit = true
           else
