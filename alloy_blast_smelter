@@ -88,7 +88,7 @@ local function sendIngridients(args)
       if pos ~= nil then
         local transfer = 0
         
-        if isTank(item) then
+        if isTank(item) == true then
           transfer = trs.transferItem(sideEast, sideWest, item.size, i + 1, 1)
         else
           transfer = trs.transferItem(sideEast, sideTop, item.size, i + 1, i + 1)
@@ -136,7 +136,8 @@ local function finishing(args)
         end
       end
     end
-    
+  end
+  
   if isEmpty(topChest) == true then
     return 0
   end  
