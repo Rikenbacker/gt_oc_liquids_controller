@@ -84,21 +84,19 @@ end
 
 local function sendIngridients(args)   
   for i, item in pairs(inputChest) do
-    if (item.name ~= nil) then
-      if pos ~= nil then
-        local transfer = 0
+    if item ~= nil then
+      local transfer = 0
         
-        if isTank(item) == true then
-          transfer = trs.transferItem(sideEast, sideWest, item.size, i + 1, 1)
-        else
-          transfer = trs.transferItem(sideEast, sideTop, item.size, i + 1, i + 1)
-        end
+      if isTank(item) == true then
+        transfer = trs.transferItem(sideEast, sideWest, item.size, i + 1, 1)
+      else
+        transfer = trs.transferItem(sideEast, sideTop, item.size, i + 1, i + 1)
+      end
         
-      	if (item.size - transfer) == 0 then
-          inputChest[i] = nil
-        else
-          inputChest[i].size = item.size - transfer 
-        end
+    	if (item.size - transfer) == 0 then
+        inputChest[i] = nil
+      else
+        inputChest[i].size = item.size - transfer 
       end
     end
   end
@@ -125,15 +123,13 @@ local function finishing(args)
   local topChest = trs.getAllStacks(sideTop).getAll()
   
   for i, item in pairs(topChest) do
-    if (item.name ~= nil) then
-      if pos ~= nil then
-        local transfer = trs.transferItem(sideTop, sideSouth, item.size, i + 1, i + 1)
+    if item ~= nil then
+      local transfer = trs.transferItem(sideTop, sideSouth, item.size, i + 1, i + 1)
         
-      	if (item.size - transfer) == 0 then
-          topChest[i] = nil
-        else
-          topChest[i].size = item.size - transfer 
-        end
+    	if (item.size - transfer) == 0 then
+        topChest[i] = nil
+      else
+        topChest[i].size = item.size - transfer 
       end
     end
   end
