@@ -84,7 +84,7 @@ end
 
 local function sendIngridients(args)   
   for i, item in pairs(inputChest) do
-    if item ~= nil then
+    if item.name ~= nil then
       local transfer = 0
         
       if isTank(item) == true then
@@ -123,7 +123,7 @@ local function finishing(args)
   local topChest = trs.getAllStacks(sideTop).getAll()
   
   for i, item in pairs(topChest) do
-    if item ~= nil then
+    if item.name ~= nil then
       local transfer = trs.transferItem(sideTop, sideSouth, item.size, i + 1, i + 1)
         
     	if (item.size - transfer) == 0 then
