@@ -32,6 +32,14 @@ local function isEmpty(table)
   return true
 end
 
+local function isItemCircuit(item)
+  if circuit == item.name then
+    return true
+  end
+  
+  return false
+end
+
 local function isOnlyCircuit(table)
   local findedCircuit = false
   
@@ -60,14 +68,6 @@ local function isTank(item)
       return true
     end
   end
-  return false
-end
-
-local function isItemCircuit(item)
-  if circuit == item.name then
-    return true
-  end
-  
   return false
 end
 
