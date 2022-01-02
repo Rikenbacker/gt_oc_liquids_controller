@@ -41,7 +41,7 @@ end
 
 local function getOutputEmptySlot(arg)
   local chest = trs.getAllStacks(sideOutput).getAll()
-  for i, item in pairs(template) do
+  for i, item in pairs(chest) do
     if item.name == nil then
       return i
     end
