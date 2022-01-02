@@ -35,10 +35,27 @@ local function getFromTemplate(item)
       return t_item
     end
   end
+  
+  return nil
+end
+
+local function getOutputEmptySlot(arg)
+  local chest = trs.getAllStacks(sideOutput).getAll()
+  for i, t_item in pairs(template) do
+    if item.name == nil then
+      return i
+    end
+  end
+  
   return nil
 end
 
 local function sendItems(arg)
+  local outputSlot = getOutputEmptySlot()
+  if outputSlot == nil then
+    return
+  end
+  
   local slotsCount = trs.getInventorySize(sideInput)
   
   for i = 0, slotsCount do
@@ -47,7 +64,7 @@ local function sendItems(arg)
     if tmplt ~= nill then		
       if item.size >= tmplt.size then
         local count = item.size - (item.size % tmplt.size)
-        trs.transferItem(sideInput, sodeOuput, count, i + 1, pos)
+        trs.transferItem(sideInput, sodeOuput, count, i + 1, outputSlot + 1)
         return
       end
     end
