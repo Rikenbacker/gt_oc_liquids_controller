@@ -17,18 +17,6 @@ local sideSignal = 1
 local colorRed = 14
 local colorWhite = 0
 
-local function isEmpty(table)
-  for i = 0, #table do
-    if table[i] ~= nill then		
-      if table[i].label ~= nil then
-        return false
-      end
-    end
-  end
-  
-  return true
-end
-
 local function readTemplate(arg)
   local inputChest = trs.getAllStacks(sideTemplate).getAll()
   template = {}
@@ -37,6 +25,31 @@ local function readTemplate(arg)
     if item.name ~= nill then		
       local tmp = {name = item.name, size = item.size}
       table.insert(template, tmp)
+    end
+  end
+end
+
+local function getFromTemplate(item)
+  for i, t_item in pairs(template) do
+    if item.name == t_item.name then
+      return t_item
+    end
+  end
+  return nil
+end
+
+local function sendItems(arg)
+  local slotsCount = trs.getInventorySize(sideInput)
+  
+  for i = 0, slotsCount do
+    local item = trs.getStackInSlot(sideInput, i)
+    local tmplt = getFromTemplate(item)
+    if tmplt ~= nill then		
+      if item.size >= tmplt.size then
+        local count = (item.size // tmplt.size) * tmplt.size
+        trs.transferItem(sideInput, sodeOuput, count, i + 1, pos)
+        return
+      end
     end
   end
 end
@@ -55,6 +68,8 @@ end
 
 while true do
   reloadTemplate()
+  
+  sendItems()
 
   computer.pullSignal(1)
 end
