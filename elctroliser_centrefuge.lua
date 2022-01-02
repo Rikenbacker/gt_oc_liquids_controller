@@ -60,14 +60,17 @@ local function sendItems(arg)
   
   for i = 0, slotsCount do
     local item = trs.getStackInSlot(sideInput, i)
-    local tmplt = getFromTemplate(item)
-    if tmplt ~= nill then		
-      if item.size >= tmplt.size then
-        local count = item.size - (item.size % tmplt.size)
-        trs.transferItem(sideInput, sodeOuput, count, i + 1, outputSlot + 1)
-        return
+
+    if item ~= nil
+      local tmplt = getFromTemplate(item)
+      if tmplt ~= nill then		
+        if item.size >= tmplt.size then
+          local count = item.size - (item.size % tmplt.size)
+          trs.transferItem(sideInput, sodeOuput, count, i, outputSlot + 1)
+          return
+        end
       end
-    end
+    end  
   end
 end
 
