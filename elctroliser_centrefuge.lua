@@ -46,7 +46,7 @@ local function sendItems(arg)
     local tmplt = getFromTemplate(item)
     if tmplt ~= nill then		
       if item.size >= tmplt.size then
-        local count = (item.size // tmplt.size) * tmplt.size
+        local count = item.size - (item.size % tmplt.size)
         trs.transferItem(sideInput, sodeOuput, count, i + 1, pos)
         return
       end
