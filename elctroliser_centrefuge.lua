@@ -61,7 +61,7 @@ local function sendItems(arg)
   for i = 0, slotsCount do
     local item = trs.getStackInSlot(sideInput, i)
 
-    if item ~= nil
+    if item ~= nil then
       local tmplt = getFromTemplate(item)
       if tmplt ~= nill then		
         if item.size >= tmplt.size then
