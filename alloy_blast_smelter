@@ -14,9 +14,9 @@ local inputChest = {}
 local tanks = {"gregtech:gt.Volumetric_Flask"}
 local circuit = "gregtech:gt.integrated_circuit"
 
-local sideTrash = 1
+local sideTrash = 4
 local sodeOuputItems = 3
-local sideInput = 4
+local sideInput = 1
 local sideOuputTank = 5
 
 local function isEmpty(table)
