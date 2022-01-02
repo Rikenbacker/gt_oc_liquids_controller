@@ -14,11 +14,10 @@ local inputChest = {}
 local tanks = {"gregtech:gt.Volumetric_Flask"}
 local circuit = "gregtech:gt.integrated_circuit"
 
-local sideNorth = 2
-local sideSouth = 3
-local sideTop = 1
-local sideEast = 5
-local sideWest = 4
+local sideTrash = 3
+local sodeOuputItems = 1
+local sideInput = 5
+local sideOuputTank = 4
 
 local function isEmpty(table)
   for i = 0, #table do
@@ -74,7 +73,7 @@ end
 local function waitForWork(args)
   inputChest = {}
 
-  inputChest = trs.getAllStacks(sideEast).getAll()
+  inputChest = trs.getAllStacks(sideInput).getAll()
   if isEmpty(inputChest) == false then
     return 1
   end
@@ -88,9 +87,9 @@ local function sendIngridients(args)
       local transfer = 0
         
       if isTank(item) == true then
-        transfer = trs.transferItem(sideEast, sideWest, item.size, i + 1, 1)
+        transfer = trs.transferItem(sideInput, sideOuputTank, item.size, i + 1, 1)
       else
-        transfer = trs.transferItem(sideEast, sideTop, item.size, i + 1, i + 1)
+        transfer = trs.transferItem(sideInput, sodeOuputItems, item.size, i + 1, i + 1)
       end
         
     	if (item.size - transfer) == 0 then
@@ -109,7 +108,7 @@ local function sendIngridients(args)
 end
 
 local function waitTakeItemsTank(args)
-  local topChest = trs.getAllStacks(sideTop).getAll()
+  local topChest = trs.getAllStacks(sodeOuputItems).getAll()
   if isEmpty(inputChest) == false then
     return 0
   elseif isOnlyCircuit(topChest) == true then
@@ -120,11 +119,11 @@ local function waitTakeItemsTank(args)
 end
 
 local function finishing(args)
-  local topChest = trs.getAllStacks(sideTop).getAll()
+  local topChest = trs.getAllStacks(sodeOuputItems).getAll()
   
   for i, item in pairs(topChest) do
     if item.name ~= nil then
-      local transfer = trs.transferItem(sideTop, sideSouth, item.size, i + 1, i + 1)
+      local transfer = trs.transferItem(sodeOuputItems, sideTrash, item.size, i + 1, i + 1)
         
     	if (item.size - transfer) == 0 then
         topChest[i] = nil
