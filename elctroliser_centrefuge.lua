@@ -12,8 +12,10 @@ local template = {}
 local sideTemplate = 5
 local sodeOuput = 3
 local sideInput = 4
-local sideLamp = 1
-local sideReloadInputSignal = 2
+local sideSignal = 1
+
+local colorRed = 14
+local colorWhite = 0
 
 local function isEmpty(table)
   for i = 0, #table do
@@ -28,12 +30,12 @@ local function isEmpty(table)
 end
 
 local function reloadTemplate(args)
-  local signal = rs.getInput(sideReloadInputSignal)
+  local signal = local signal = rs.getBundledInput(sideSignal, colorRed)
   
   if signal > 0 then
-    rs.setOutput(sideLamp, 15)
+    rs.setBundledOutput(sideSignal, colorWhite, 255)
   else
-    rs.setOutput(sideLamp, 0)
+    rs.setBundledOutput(sideSignal, colorWhite, 0)
   end
 
 end
