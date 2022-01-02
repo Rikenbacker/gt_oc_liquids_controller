@@ -29,10 +29,23 @@ local function isEmpty(table)
   return true
 end
 
+local function readTemplate(arg)
+  local inputChest = trs.getAllStacks(sideTemplate).getAll()
+  template = {}
+  
+  for i, item in pairs(inputChest) do
+    if item.name ~= nill then		
+      local tmp = {name = item.name, size = item.size}
+      table.insert(template, tmp)
+    end
+  end
+end
+
 local function reloadTemplate(args)
-  local signal = local signal = rs.getBundledInput(sideSignal, colorRed)
+  local signal = rs.getBundledInput(sideSignal, colorRed)
   
   if signal > 0 then
+    readTemplate()
     rs.setBundledOutput(sideSignal, colorWhite, 255)
   else
     rs.setBundledOutput(sideSignal, colorWhite, 0)
