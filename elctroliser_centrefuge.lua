@@ -10,7 +10,7 @@ local rs = component.proxy(component.list("redstone")())
 local template = {}
 
 local sideTemplate = 5
-local sodeOutput = 3
+local sideOutput = 3
 local sideInput = 4
 local sideSignal = 1
 
@@ -66,7 +66,7 @@ local function sendItems(arg)
       if tmplt ~= nill then		
         if item.size >= tmplt.size then
           local count = item.size - (item.size % tmplt.size)
-          trs.transferItem(sideInput, sodeOutput, count, i, outputSlot + 1)
+          trs.transferItem(sideInput, sideOutput, count, i, outputSlot + 1)
           return
         end
       end
