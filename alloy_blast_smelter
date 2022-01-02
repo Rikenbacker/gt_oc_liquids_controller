@@ -75,6 +75,9 @@ local function waitForWork(args)
 
   inputChest = trs.getAllStacks(sideInput).getAll()
   if isEmpty(inputChest) == false then
+    -- ПЕРЕДЕЛАТЬ! После начала складирования нужно подождать того что в сундук перестали подкладываться предметы!!!
+    computer.pullSignal(1)
+    inputChest = trs.getAllStacks(sideInput).getAll()
     return 1
   end
   
