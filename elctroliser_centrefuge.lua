@@ -9,9 +9,9 @@ local rs = component.proxy(component.list("redstone")())
 -- Шаблон
 local template = {}
 
-local sideTemplate = 5
-local sideOutput = 3
-local sideInput = 4
+local sideTemplate = 4
+local sideOutput = 2
+local sideInput = 5
 local sideSignal = 1
 
 local colorRed = 14
