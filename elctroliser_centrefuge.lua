@@ -58,7 +58,7 @@ local function sendItems(arg)
   
   local slotsCount = trs.getInventorySize(sideInput)
   
-  for i = 0, slotsCount do
+  for i = 1, slotsCount do
     local item = trs.getStackInSlot(sideInput, i)
 
     if item ~= nil then
