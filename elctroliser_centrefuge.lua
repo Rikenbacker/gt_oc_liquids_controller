@@ -70,7 +70,9 @@ local function sendItems(arg)
           return
         end
       end
-    end  
+    else
+      return
+    end 
   end
 end
 
