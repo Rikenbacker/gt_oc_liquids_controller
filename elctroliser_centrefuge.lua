@@ -23,7 +23,7 @@ local function readTemplate(arg)
   
   for i, item in pairs(inputChest) do
     if item.name ~= nill then		
-      local tmp = {name = item.name, size = item.size}
+      local tmp = {name = item.name, damage = item.damage, size = item.size}
       table.insert(template, tmp)
     end
   end
@@ -31,7 +31,7 @@ end
 
 local function getFromTemplate(item)
   for i, t_item in pairs(template) do
-    if item.name == t_item.name then
+    if item.name == t_item.name and item.damage == t_item.damage then
       return t_item
     end
   end
