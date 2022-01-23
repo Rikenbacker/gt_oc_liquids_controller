@@ -112,7 +112,7 @@ end
 
 local function waitTakeItemsTank(args)
   local topChest = trs.getAllStacks(sodeOuputItems).getAll()
-  if isEmpty(inputChest) == false then
+  if isEmpty(topChest) == false then
     return 0
   elseif isOnlyCircuit(topChest) == true then
     return 3
