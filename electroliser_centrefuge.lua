@@ -59,10 +59,13 @@ end
 local function sendItems(arg)
   local outputSlot = getOutputEmptySlot()
   if outputSlot == nil then
+    rs.setBundledOutput(sideSignal, colorBlack, 50)
     return
   end
   
   local slotsCount = trs.getInventorySize(sideInput)
+  
+  rs.setBundledOutput(sideSignal, colorBlack, 100 + slotsCount)
   
   for i = 1, slotsCount do
     local item = trs.getStackInSlot(sideInput, i)
