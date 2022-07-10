@@ -16,6 +16,7 @@ local sideSignal = 1
 
 local colorRed = 14
 local colorWhite = 0
+local colorBlack = 15
 
 local function readTemplate(arg)
   local inputChest = trs.getAllStacks(sideTemplate).getAll()
@@ -87,6 +88,7 @@ local function reloadTemplate(args)
   if signal > 0 then
     readTemplate()
     rs.setBundledOutput(sideSignal, colorWhite, 255)
+    rs.setBundledOutput(sideSignal, colorBlack, #template)
   else
     rs.setBundledOutput(sideSignal, colorWhite, 0)
   end
