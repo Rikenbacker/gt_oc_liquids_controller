@@ -2,6 +2,13 @@
 
 local trs = component.proxy(component.list("transposer")())
 
+-- Bottom (bottom) (down), Number: 0
+-- Top (top) (up), Number: 1
+-- Back (back) (north), Number: 2
+-- Front (front) (south), Number: 3
+-- Right (right) (west), Number: 4
+-- Left (left) (east), Number: 5
+
 -- 0 - Ожидание работы (Пока во входном сундуке не появится что-либо)
 -- 1 - Раздача товара (пока не опустеет входной сундук)
 -- 2 - Ожидание опустошения выходного сундука (либо остаётся только одна схема)
