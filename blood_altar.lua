@@ -26,12 +26,20 @@ end
 function main()
     disableAccelerator()
     while true do
-        inputItem = trp.getStackInSlot(inputSide, 2)
+        inputItem = trp.getStackInSlot(inputSide, 1) --Для минисундука 1, для дроверса 2
 
         if inputItem ~= nil then
             trp.transferItem(altarSide, orbSide)
             trp.transferItem(inputSide, altarSide)
-            while trp.getStackInSlot(altarSide, 1).label == inputItem.label do
+            isSameThing = 1
+            while isSameThing == 1 do
+                if trp.getStackInSlot(altarSide, 1) ~= nil then
+                    if trp.getStackInSlot(altarSide, 1).label ~= inputItem.label then
+                        isSameThing = 0
+                    end
+                else 
+                    isSameThing = 0
+                end
                 enableAccelerator()
                 computer.pullSignal(1)
             end
