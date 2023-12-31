@@ -20,6 +20,7 @@ local inputChest = {}
 
 local tanks = {"gregtech:gt.Volumetric_Flask"}
 local circuit = "gregtech:gt.integrated_circuit"
+local catalizator = "bartworks:gt.bwMetaGenerateddust"
 
 local sideTrash = 4
 local sodeOuputItems = 3
@@ -42,7 +43,9 @@ local function isItemCircuit(item)
   if circuit == item.name then
     return true
   end
-  
+  if catalizator == item.name then
+    return true
+  end
   return false
 end
 
