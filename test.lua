@@ -1,6 +1,7 @@
 local component = require("component")
 trs = component.transposer
 print(trs)
+for i, item in pairs(trs) do print (i, item) end
 print(trs.getAllStacks(2))
 print(trs.getInventoryName(2))
 items = trs.getAllStacks(2)
