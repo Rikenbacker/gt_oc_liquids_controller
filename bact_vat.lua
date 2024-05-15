@@ -9,9 +9,6 @@
 local rs = component.proxy(component.list("redstone")())
 local trs = component.proxy(component.list("transposer")())
 
-local tanks = {"gregtech:gt.Volumetric_Flask"}
-local circuit = "gregtech:gt.integrated_circuit"
-
 -- Юг 		3	OutputHatch в котором нужно поддерживать половину
 -- Верх		1	танк куда выгружать жижу
 -- Низ 		0	Источник сигналов
@@ -28,10 +25,13 @@ local sideRod = 4
 -- Красный	14	Включить машину
 local colorMain = 14
 
+-- 1 - полный танк. Если нужно заполнять не до конца, то меньше 1
+local tankStorageMultiplier = 0.8
+
 local function transferFluid()
-  local outCapacity = math.floor(trs.getTankCapacity(sideOutputHatch) / 2)
+  local outCapacity = math.floor(trs.getTankCapacity(sideOutputHatch) * 0.495)
   local outLevel = trs.getTankLevel(sideOutputHatch)
-  local storageCapacity = trs.getTankCapacity(sideTank)
+  local storageCapacity = math.floor(trs.getTankCapacity(sideTank) * tankStorageMultiplier)
   local storageLevel = trs.getTankLevel(sideTank)
   
   local needToTransfer = outLevel - outCapacity
@@ -68,8 +68,15 @@ local function isEmpty(table)
 end
 
 local function transferRods()
-  local radioStack = trs.getAllStacks(sideRadio).getAll()
-	
+  local allStacks = trs.getAllStacks(sideRadio)
+  if allStacks == nil then
+	return false
+  end
+  local radioStack = allStacks.getAll()
+  if radioStack == nil then
+	return false
+  end
+  
   if isEmpty(radioStack) == false then
 	return true
   end  
